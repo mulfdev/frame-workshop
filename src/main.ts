@@ -3,7 +3,7 @@ import { Hono } from "hono";
 
 const app = new Hono();
 
-app.get("/", (c) => c.html(`
+app.get("/", (c) => c.text(`
     <!DOCTYPE html>
     <html>
       <head>
