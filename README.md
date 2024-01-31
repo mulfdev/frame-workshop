@@ -1,12 +1,10 @@
-# ts-starter
+# Lil's Coding Sesson #1 - Warpcast Frames
 
-Version: 1.0.0
-
-Author: mulf
+Presented by [mulf](https://warpcast.com/mulfdev.eth)
 
 ## Description
 
-This package serves as a TypeScript starter kit. It includes strict type checking and a reasonably recent compilation target (es2020). It is intended to be used with Node.js at LTS version 18.x.
+In this session reviewed how to set up a static frame on Warpcast. We followed the [docs](https://warpcast.notion.site/Farcaster-Frames-4bd47fe97dc74a42a48d3a234636d8c5) provided by the WC team. The end result is hosted on [railway](https://railway.app) so it can be reached by the warpcast servers.
 
 ## Installation
 
