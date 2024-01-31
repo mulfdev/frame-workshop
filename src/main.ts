@@ -15,5 +15,6 @@ app.get("/", (c) => c.html(`
 console.log("sever is running")
 serve({
   fetch: app.fetch,
+  // @ts-expect-error typerr
   port: process.env.PORT || 3000
 });
