@@ -13,4 +13,7 @@ app.get("/", (c) => c.html(`
     </html>
 `));
 console.log("sever is running")
-serve(app);
+serve({
+  fetch: app.fetch,
+  port: process.env.PORT || 3000
+});
