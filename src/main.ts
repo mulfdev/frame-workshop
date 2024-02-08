@@ -26,6 +26,7 @@ app.get("/", (c) =>
 
 app.post("/button1", (c) => {
   // https://i.imgur.com/FDD8qwD.jpeg
+  console.log(c)
   c.text(`
      <!DOCTYPE html>
     <html>
