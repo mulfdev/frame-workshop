@@ -8,6 +8,7 @@ app.get("/", (c) =>
     <!DOCTYPE html>
     <html>
       <head>
+         <meta property="og:title" content="Our First frame">
         <meta property="og:image" content="https://i.imgur.com/sS717ci.jpg">
 				<meta property="fc:frame" content="vNext" />
 				<meta property="fc:frame:image" content="https://i.imgur.com/sS717ci.jpeg" />
