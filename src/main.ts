@@ -16,7 +16,7 @@ app.get("/", (c) =>
         <meta property="fc:frame:button:2" content="Purple" />
         <meta property="fc:frame:button:3" content="Red" />
         <meta property="fc:frame:button:4" content="Blue" />
-
+<meta property="post_url" content="https://frame-workshop-production-55b0.up.railway.app/button1""
         <meta property="fc:frame:button:1:action content="post"/>
         <meta property="fc:frame:button:1:target" content="https://frame-workshop-production-55b0.up.railway.app/button1" />
       </head>
