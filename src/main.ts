@@ -24,8 +24,10 @@ app.get("/", (c) =>
 `)
 );
 
-app.post("/button1", (c) => {
+app.post("/res", (c) => {
   // https://i.imgur.com/FDD8qwD.jpeg
+
+  console.log(c.req)
 
   return c.text(`
      <!DOCTYPE html>
