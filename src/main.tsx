@@ -15,7 +15,7 @@ const Layout = () => {
         <meta property="fc:frame:button:2" content="Purple" />
         <meta property="fc:frame:button:3" content="Red" />
         <meta property="fc:frame:button:4" content="Blue" />
-        <meta property="fc:frame:post_url" content="https://frame-workshop-production-55b0.up.railway.app/res" />
+        <meta property="fc:frame:post_url" content="https://frame-workshop.up.railway.app/res" />
       </head>
     </html>
   )
