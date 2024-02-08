@@ -1,5 +1,19 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
+import { HTTPException } from 'hono/http-exception'
+
+type FrameDataRes = {
+  fid: number;
+  url: string;
+  messageHash: string;
+  timestamp: number;
+  network: number;
+  buttonIndex: number;
+  castId: {
+    fid: number;
+    hash: string;
+  };
+};
 
 const app = new Hono();
 
@@ -26,9 +40,11 @@ app.get("/", (c) => {
 })
 
 app.post("/res", async (c) => {
-  const frameData = await c.req.json()
+  const frameData: { untrustedData: FrameDataRes } = await c.req.json()
 
-  console.log(frameData)
+  if (!frameData.untrustedData.buttonIndex) {
+    throw new HTTPException(400, { message: "frame data missing" })
+  }
 
   return c.text(`
      <!DOCTYPE html>
