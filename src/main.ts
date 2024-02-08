@@ -27,7 +27,7 @@ app.get("/", (c) =>
 app.post("/res", (c) => {
   // https://i.imgur.com/FDD8qwD.jpeg
 
-  console.log(c.req)
+  console.log(c.req.body)
 
   return c.text(`
      <!DOCTYPE html>
