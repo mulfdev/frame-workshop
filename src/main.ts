@@ -29,7 +29,7 @@ app.post("/res", async (c) => {
 
   const json = await c.req.text()
 
-  console.log({ json })
+  console.log(json)
 
 
   return c.text(`
