@@ -8,10 +8,13 @@ app.get("/", (c) =>
     <!DOCTYPE html>
     <html>
       <head>
-        <meta property="og:title" content="Vote Recorded">
         <meta property="og:image" content="https://i.imgur.com/sS717ci.jpg">
 				<meta property="fc:frame" content="vNext" />
 				<meta property="fc:frame:image" content="https://i.imgur.com/sS717ci.jpeg" />
+        <meta property="fc:frame:button:1" content="Green" />
+        <meta property="fc:frame:button:2" content="Purple" />
+        <meta property="fc:frame:button:3" content="Red" />
+        <meta property="fc:frame:button:4" content="Blue" />
       </head>
     </html>
 `)
