@@ -27,8 +27,10 @@ app.get("/", (c) =>
 app.post("/res", async (c) => {
   // https://i.imgur.com/FDD8qwD.jpeg
 
-  const json = await c.json({})
+  const json = c.req.text
+
   console.log({ json })
+
 
   return c.text(`
      <!DOCTYPE html>
