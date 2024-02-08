@@ -24,10 +24,11 @@ app.get("/", (c) =>
 `)
 );
 
-app.post("/res", (c) => {
+app.post("/res", async (c) => {
   // https://i.imgur.com/FDD8qwD.jpeg
 
-  console.log(c.req.body)
+  const json = await c.json({})
+  console.log({ json })
 
   return c.text(`
      <!DOCTYPE html>
