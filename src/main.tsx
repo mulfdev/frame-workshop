@@ -15,28 +15,36 @@ type FrameDataRes = {
   };
 };
 
+
 const app = new Hono();
 
-const Layout = () => {
+const ButtonRenderer = ({ buttonData }: { buttonData: string[] }) => {
+  return (
+    <>
+      {buttonData.map((content, idx) => <meta property={`fc:frame:button:${idx + 1} content=${content}`} />)}
+    </>
+  )
+}
+
+
+const Layout = ({ imgUrl }: { imgUrl: string }) => {
+  const buttonData = ["Btn 1", "Btn 2", "Btn 3", "Btn 4"]
   return (
     <html>
       <head>
         <meta property="og:title" content="Our First frame" />
-        <meta property="og:image" content="https://i.imgur.com/sS717ci.jpg" />
+        <meta property="og:image" content={`${imgUrl}`} />
         <meta property="fc:frame" content="vNext" />
-        <meta property="fc:frame:image" content="https://i.imgur.com/sS717ci.jpeg" />
-        <meta property="fc:frame:button:1" content="Green" />
-        <meta property="fc:frame:button:2" content="Purple" />
-        <meta property="fc:frame:button:3" content="Red" />
-        <meta property="fc:frame:button:4" content="Blue" />
+        <meta property="fc:frame:image" content={`${imgUrl}`} />
         <meta property="fc:frame:post_url" content="https://frame-workshop.up.railway.app/res" />
+        {<ButtonRenderer buttonData={buttonData} />}
       </head>
     </html>
   )
 }
 
 app.get("/", (c) => {
-  return c.render(<Layout />)
+  return c.render(<Layout imgUrl="https://i.imgur.com/sS717ci.jpg" />)
 })
 
 app.post("/res", async (c) => {
@@ -46,22 +54,29 @@ app.post("/res", async (c) => {
     throw new HTTPException(400, { message: "frame data missing" })
   }
 
-  // const { buttonIndex } = frameData.untrustedData
+  const { buttonIndex } = frameData.untrustedData
 
+  switch (buttonIndex) {
+    case 1: {
+      return (<Layout imgUrl="https://i.imgur.com/g4Ll2Dj.png" />)
+    }
+    case 2: {
+      return (<Layout imgUrl="https://i.imgur.com/mnSybOx.jpeg" />)
+    }
+    case 3: {
+      return (<Layout imgUrl="https://i.imgur.com/eOw6ff3.jpeg" />)
+    }
+    case 4: {
+      return (<Layout imgUrl="https://i.imgur.com/5CBUsN1.jpeg" />)
+    }
 
-
-  return c.text(`
-     <!DOCTYPE html>
-    <html>
-      <head>
-         <meta property="og:title" content="Our First frame" />
-        <meta property="og:image" content="https://i.imgur.com/FDD8qwD.jpeg" />
-				<meta property="fc:frame" content="vNext" />
-				<meta property="fc:frame:image" content="https://i.imgur.com/FDD8qwD.jpeg" />
-     </head>
-    </html>
-
-  `)
+    default: {
+      //const buttonData = ["Btn 1 d", "Btn 2 d", "Btn 3 d", "Btn 4 d"]
+      return (
+        <Layout imgUrl="https://i.imgur.com/sS717ci.jpg" />
+      )
+    }
+  }
 })
 
 console.log("sever is running");
