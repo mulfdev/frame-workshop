@@ -21,7 +21,7 @@ const app = new Hono();
 const ButtonRenderer = ({ buttonData }: { buttonData: string[] }) => {
   return (
     <>
-      {buttonData.map((content, idx) => <meta property={`fc:frame:button:${idx + 1}"`} content={`${content}`} />)}
+      {buttonData.map((content, idx) => <meta property={`fc:frame:button:${idx + 1}`} content={`${content}`} />)}
     </>
   )
 }
