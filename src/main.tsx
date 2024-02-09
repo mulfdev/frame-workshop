@@ -8,7 +8,7 @@ type FrameDataRes = {
   messageHash: string;
   timestamp: number;
   network: number;
-  buttonIndex: number;
+  buttonIndex: 1 | 2 | 3 | 4;
   castId: {
     fid: number;
     hash: string;
@@ -45,6 +45,10 @@ app.post("/res", async (c) => {
   if (!frameData.untrustedData.buttonIndex) {
     throw new HTTPException(400, { message: "frame data missing" })
   }
+
+  // const { buttonIndex } = frameData.untrustedData
+
+
 
   return c.text(`
      <!DOCTYPE html>
