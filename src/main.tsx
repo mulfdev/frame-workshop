@@ -50,6 +50,8 @@ app.get("/", (c) => {
 app.post("/res", async (c) => {
   const frameData: { untrustedData: FrameDataRes } = await c.req.json()
 
+  console.log(frameData)
+
   if (!frameData?.untrustedData?.buttonIndex) {
     throw new HTTPException(400, { message: "frame data missing" })
   }
@@ -58,21 +60,21 @@ app.post("/res", async (c) => {
 
   switch (buttonIndex) {
     case 1: {
-      return (<Layout imgUrl="https://i.imgur.com/g4Ll2Dj.png" />)
+      return c.render(<Layout imgUrl="https://i.imgur.com/g4Ll2Dj.png" />)
     }
     case 2: {
-      return (<Layout imgUrl="https://i.imgur.com/mnSybOx.jpeg" />)
+      return c.render(<Layout imgUrl="https://i.imgur.com/mnSybOx.jpeg" />)
     }
     case 3: {
-      return (<Layout imgUrl="https://i.imgur.com/eOw6ff3.jpeg" />)
+      return c.render(<Layout imgUrl="https://i.imgur.com/eOw6ff3.jpeg" />)
     }
     case 4: {
-      return (<Layout imgUrl="https://i.imgur.com/5CBUsN1.jpeg" />)
+      return c.render(<Layout imgUrl="https://i.imgur.com/5CBUsN1.jpeg" />)
     }
 
     default: {
       //const buttonData = ["Btn 1 d", "Btn 2 d", "Btn 3 d", "Btn 4 d"]
-      return (
+      return c.render(
         <Layout imgUrl="https://i.imgur.com/sS717ci.jpg" />
       )
     }
