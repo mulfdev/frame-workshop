@@ -50,7 +50,7 @@ app.get("/", (c) => {
 app.post("/res", async (c) => {
   const frameData: { untrustedData: FrameDataRes } = await c.req.json()
 
-  if (!frameData.untrustedData.buttonIndex) {
+  if (!frameData?.untrustedData?.buttonIndex) {
     throw new HTTPException(400, { message: "frame data missing" })
   }
 
