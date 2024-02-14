@@ -1,3 +1,4 @@
+
 {
   "compilerOptions": {
     "lib": ["es2022"],
@@ -23,8 +24,18 @@
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx",
+    "allowJs": true,
+    "checkJs": true
   },
-  "include": ["src/**/*.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx"
+  ],
   "exclude": ["node_modules"]
 }
+

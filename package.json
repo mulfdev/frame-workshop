@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc && node ./dist/main.js",
-    "dev": "tsx watch ./src/main.ts",
+    "dev": "tsx watch ./src/main.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.7.0",
-    "hono": "^3.12.8"
+    "@vercel/og": "^0.6.2",
+    "hono": "^3.12.8",
+    "satori": "^0.10.13"
   }
 }
