@@ -14,7 +14,7 @@ app.get("/", (c) =>
 				<meta property="fc:frame:image" content="https://i.imgur.com/sS717ci.jpeg" />
       </head>
     </html>
-`)
+`),
 );
 console.log("sever is running");
 serve({
