@@ -74,7 +74,7 @@ app.post("/res", async (c) => {
 
   switch (buttonIndex) {
     case 1: {
-      return c.render(<Layout imgUrl="https://i.imgur.com/g4Ll2Dj.png" />);
+      return c.render(<Layout imgUrl="https://i.imgur.com/EWFu70H.jpeg" />);
     }
     case 2: {
       return c.render(<Layout imgUrl="https://i.imgur.com/mnSybOx.jpeg" />);
