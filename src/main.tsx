@@ -66,7 +66,7 @@ const Layout = ({
 app.get("/", (c) =>
   c.render(
     <Layout
-      imgUrl="https://frame-workshop-production.up.railway.app"
+      imgUrl="https://frame-workshop-production.up.railway.app/img"
       postUrl="https://frame-workshop-production.up.railway.app"
     />,
   ),
