@@ -61,41 +61,14 @@ const Layout = ({
   );
 };
 
-app.get("/", () => {
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          backgroundColor: "black",
-          backgroundSize: "150px 150px",
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          textAlign: "center",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          flexWrap: "nowrap",
-        }}
-      >
-        <div
-          style={{
-            fontSize: 60,
-            fontStyle: "normal",
-            letterSpacing: "-0.025em",
-            color: "white",
-            marginTop: 30,
-            padding: "0 120px",
-            lineHeight: 1.4,
-            whiteSpace: "pre-wrap",
-          }}
-        >
-          hello hono
-        </div>
-      </div>
-    ),
-  );
-});
+app.get("/", (c) =>
+  c.render(
+    <Layout
+      imgUrl="/img"
+      postUrl="https://frame-workshop.up.railway.app/res"
+    />,
+  ),
+);
 
 app.post("/res", async (c) => {
   const frameData: { untrustedData: FrameDataRes } = await c.req.json();
@@ -166,7 +139,7 @@ app.post("/redis", async (c) => {
   });
 });
 
-app.get("/img", async () => {
+app.get("/img", async (c) => {
   return new ImageResponse(
     (
       <div
