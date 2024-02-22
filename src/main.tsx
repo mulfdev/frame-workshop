@@ -53,7 +53,9 @@ const Layout = ({
         <meta property="fc:frame:image" content={`${imgUrl}`} />
         <meta
           property="fc:frame:post_url"
-          content={postUrl || "https://frame-workshop.up.railway.app/res"}
+          content={
+            postUrl || "https://frame-workshop-production.up.railway.app"
+          }
         />
         {<ButtonRenderer buttonData={buttonData || defaultButtonData} />}
       </head>
@@ -64,8 +66,8 @@ const Layout = ({
 app.get("/", (c) =>
   c.render(
     <Layout
-      imgUrl="https://frame-workshop.up.railway.app/img"
-      postUrl="https://frame-workshop.up.railway.app/res"
+      imgUrl="https://frame-workshop-production.up.railway.app"
+      postUrl="https://frame-workshop-production.up.railway.app"
     />,
   ),
 );
