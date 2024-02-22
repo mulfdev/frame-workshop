@@ -1,6 +1,15 @@
+/*
+ * Added dotenv
+ * added redis lib upstash
+ * added hono-og
+ */
+
+import "dotenv/config";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { HTTPException } from "hono/http-exception";
+import { Redis } from "@upstash/redis";
+import { ImageResponse } from "hono-og";
 
 type FrameDataRes = {
   fid: number;
@@ -52,21 +61,46 @@ const Layout = ({
   );
 };
 
-app.get("/", (c) =>
-  c.render(
-    <Layout
-      imgUrl="https://i.imgur.com/sS717ci.jpg"
-      postUrl="https://frame-workshop.up.railway.app/res"
-    />,
-  ),
-);
+app.get("/", () => {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          backgroundColor: "black",
+          backgroundSize: "150px 150px",
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          textAlign: "center",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          flexWrap: "nowrap",
+        }}
+      >
+        <div
+          style={{
+            fontSize: 60,
+            fontStyle: "normal",
+            letterSpacing: "-0.025em",
+            color: "white",
+            marginTop: 30,
+            padding: "0 120px",
+            lineHeight: 1.4,
+            whiteSpace: "pre-wrap",
+          }}
+        >
+          hello hono
+        </div>
+      </div>
+    ),
+  );
+});
 
 app.post("/res", async (c) => {
   const frameData: { untrustedData: FrameDataRes } = await c.req.json();
 
-  console.log(frameData);
-
-  if (!frameData?.untrustedData?.buttonIndex) {
+  if (!frameData?.untrustedData.buttonIndex) {
     throw new HTTPException(400, { message: "frame data missing" });
   }
 
@@ -90,6 +124,82 @@ app.post("/res", async (c) => {
       return c.render(<Layout imgUrl="https://i.imgur.com/sS717ci.jpg" />);
     }
   }
+});
+
+app.post("/redis", async (c) => {
+  if (!process.env.REDIS_TOKEN) {
+    throw new HTTPException(400, { message: "redis token required" });
+  }
+  const redis = new Redis({
+    url: "https://usw2-engaged-mallard-31353.upstash.io",
+    token: process.env.REDIS_TOKEN,
+  });
+
+  const frameData: { untrustedData: FrameDataRes } = await c.req.json();
+
+  if (!frameData?.untrustedData.fid || !frameData.untrustedData.buttonIndex) {
+    throw new HTTPException(400, {
+      message: "frame data missing: fid or button index",
+    });
+  }
+
+  const hasVoted = await redis.sismember(
+    "alreadyVoted",
+    frameData.untrustedData.fid,
+  );
+
+  if (hasVoted) {
+    throw new HTTPException(400, { message: "fid has already voted" });
+  }
+
+  const data = await redis.hincrby(
+    "workshopPoll",
+    frameData.untrustedData.buttonIndex.toString(),
+    1,
+  );
+  await redis.sadd("alreadyVoted", frameData.untrustedData.fid);
+
+  console.log(data);
+
+  return c.json({
+    message: "recieved",
+  });
+});
+
+app.get("/img", async (c) => {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          backgroundColor: "black",
+          backgroundSize: "150px 150px",
+          height: "100%",
+          width: "100%",
+          display: "flex",
+          textAlign: "center",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          flexWrap: "nowrap",
+        }}
+      >
+        <div
+          style={{
+            fontSize: 60,
+            fontStyle: "normal",
+            letterSpacing: "-0.025em",
+            color: "white",
+            marginTop: 30,
+            padding: "0 120px",
+            lineHeight: 1.4,
+            whiteSpace: "pre-wrap",
+          }}
+        >
+          hello hono
+        </div>
+      </div>
+    ),
+  );
 });
 
 console.log("sever is running");
