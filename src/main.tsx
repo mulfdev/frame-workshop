@@ -166,7 +166,7 @@ app.post("/redis", async (c) => {
   });
 });
 
-app.get("/img", async (c) => {
+app.get("/img", async () => {
   return new ImageResponse(
     (
       <div
